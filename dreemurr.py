@@ -8,10 +8,10 @@ from big_sleep import Imagine
 import random as rnd
 
 st = """In her eyes tonight
-There's a glow tonight
-They're so bright they could light
+Theres a glow tonight
+Theyre so bright they could light
 Fountainbleu tonight
-She's so gracious
+Shes so gracious
 So vivacious
 She is not thinking of me
 Bless her little heart
@@ -257,7 +257,7 @@ for x in st.splitlines():
     save_progress = True,
     lr = 0.07,
     text_min="",
-    iterations = 31,
+    iterations = 51,
     epochs = 1,
     max_classes = 15,
     num_cutouts = 48,
@@ -276,5 +276,5 @@ for x in st.splitlines():
       print("\nCurrent seed is: %i" % Seed)
   !mkdir "{x}"
   !mv ./*.png "{x}"
-  !"{x}.tar.gz" "{x}"
-  !rm -rf "{x}"exit()
+  !tar -zcvf "{x}.tar.gz" "{x}"
+  !rm -rf "{x}"
