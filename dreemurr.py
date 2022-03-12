@@ -257,7 +257,7 @@ for x in st.splitlines():
     save_progress = True,
     lr = 0.07,
     text_min="",
-    iterations = 26,
+    iterations = 31,
     epochs = 1,
     max_classes = 15,
     num_cutouts = 48,
@@ -267,7 +267,7 @@ for x in st.splitlines():
   )
 
   for epoch in trange(1, desc = 'epochs'):
-    for i in trange(26, desc = 'iteration'):
+    for i in trange(31, desc = 'iteration'):
       path = f'{x}.{i}'
       model.train_step(epoch, i)
 
@@ -276,7 +276,5 @@ for x in st.splitlines():
       print("\nCurrent seed is: %i" % Seed)
   !mkdir "{x}"
   !mv ./*.png "{x}"
-  !tar -zcvf "{x}.tar.gz" "{x}"
-  !rm -rf "{x}"
-  clear_output()
-!zip archive *
+  !"{x}.tar.gz" "{x}"
+  !rm -rf "{x}"exit()
