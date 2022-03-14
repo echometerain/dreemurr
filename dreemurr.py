@@ -208,8 +208,8 @@ As I stood in the twilight of that vast empty building
 But I did not answer
 The question echoed over and over
 But I remained silent until the echoes died
-And as twilight passed into evening I felt my special plan
-Moving towards a greater darkness
+And as twilight passed into evening
+I felt my special plan moving towards a greater darkness
 There are some who have no voices
 Or none that will ever speak
 Because of the things they know about this world
@@ -257,7 +257,7 @@ for x in st.splitlines():
     save_progress = True,
     lr = 0.07,
     text_min="",
-    iterations = 51,
+    iterations = 100,
     epochs = 1,
     max_classes = 15,
     num_cutouts = 48,
@@ -267,14 +267,15 @@ for x in st.splitlines():
   )
 
   for epoch in trange(1, desc = 'epochs'):
-    for i in trange(31, desc = 'iteration'):
+    for i in trange(100, desc = 'iteration'):
       path = f'{x}.{i}'
       model.train_step(epoch, i)
 
       if i == 0 or i % model.save_every != 0:  #basically: if i not multiple of save_every, skip next steps
         continue
       print("\nCurrent seed is: %i" % Seed)
-  !mkdir "{x}"
-  !mv ./*.png "{x}"
-  !tar -zcvf "{x}.tar.gz" "{x}"
-  !rm -rf "{x}"
+  !for f in *.png ; do mv "$f" "${f//[!0-9]/}.png"; done
+  !rm ./.png
+  !for i in {0..9}; do mv "$i.png" "0$i.png"; done
+  !ffmpeg -framerate 24 -i "./%02d.png" -pix_fmt yuv420p "{x}.mp4"
+  !rm *.png
